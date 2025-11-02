@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Plus, Edit2, AlertCircle, Users, BookOpen as BookOpenIcon, TrendingUp } from 'lucide-react';
 import { Book, Borrow, User } from '../types';
-import { getBooks, saveBooks, getBorrows, saveBorrows, getUsers } from '../utils/localStorage';
+import { getBooks, saveBooks, getBorrows, saveBorrows, getUsers } from '../utils/dataLayer';
 
 export default function LibrarianDashboard() {
   const [books, setBooks] = useState<Book[]>([]);

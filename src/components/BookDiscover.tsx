@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Search, Filter, BookOpen } from 'lucide-react';
 import { Book } from '../types';
-import { getBooks } from '../utils/localStorage';
+import { getBooks } from '../utils/dataLayer';
 
 interface BookDiscoverProps {
   onBookSelect: (book: Book) => void;
@@ -14,9 +14,12 @@ export default function BookDiscover({ onBookSelect }: BookDiscoverProps) {
   const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
 
   useEffect(() => {
-    const allBooks = getBooks();
-    setBooks(allBooks);
-    setFilteredBooks(allBooks);
+    const loadBooks = async () => {
+      const allBooks = await getBooks();
+      setBooks(allBooks);
+      setFilteredBooks(allBooks);
+    };
+    loadBooks();
   }, []);
 
   useEffect(() => {

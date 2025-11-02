@@ -7,7 +7,7 @@ import BookDetails from './components/BookDetails';
 import MyLibrary from './components/MyLibrary';
 import LibrarianDashboard from './components/LibrarianDashboard';
 import { User, Book } from './types';
-import { getCurrentUser, setCurrentUser as saveCurrentUser, initializeStorage } from './utils/localStorage';
+import { getCurrentUser, setCurrentUser as saveCurrentUser, createUser, initializeStorage } from './utils/dataLayer';
 
 type View = 'landing' | 'role-selection' | 'discover' | 'my-library' | 'librarian';
 
@@ -26,16 +26,19 @@ function App() {
     }
   }, []);
 
-  const handleRoleSelect = (role: 'user' | 'librarian') => {
-    const newUser: User = {
-      id: Date.now().toString(),
+  const handleRoleSelect = async (role: 'user' | 'librarian') => {
+    const userData = {
       name: role === 'librarian' ? 'Librarian' : 'Reader',
-      email: `${role}@pocketarchive.local`,
+      email: `${role}_${Date.now()}@pocketarchive.local`,
       role: role,
     };
-    setCurrentUser(newUser);
-    saveCurrentUser(newUser);
-    setCurrentView(role === 'librarian' ? 'librarian' : 'discover');
+
+    const newUser = await createUser(userData);
+    if (newUser) {
+      setCurrentUser(newUser);
+      saveCurrentUser(newUser);
+      setCurrentView(role === 'librarian' ? 'librarian' : 'discover');
+    }
   };
 
   const handleLogout = () => {

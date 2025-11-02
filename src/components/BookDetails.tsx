@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { X, Calendar, BookOpen, User as UserIcon } from 'lucide-react';
 import { Book, User, Borrow, Reservation } from '../types';
-import { getBooks, saveBooks, getBorrows, saveBorrows, getReservations, saveReservations } from '../utils/localStorage';
+import { getBooks, saveBooks, getBorrows, saveBorrows, getReservations, saveReservations } from '../utils/dataLayer';
 
 interface BookDetailsProps {
   book: Book;

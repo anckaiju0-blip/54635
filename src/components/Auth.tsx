@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BookOpen, LogIn, UserPlus } from 'lucide-react';
 import { User } from '../types';
-import { getUsers, saveUsers, setCurrentUser } from '../utils/localStorage';
+import { getUsers, saveUsers, setCurrentUser } from '../utils/dataLayer';
 
 interface AuthProps {
   onAuthSuccess: (user: User) => void;

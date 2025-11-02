@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BookOpen, Calendar, Clock, AlertCircle } from 'lucide-react';
 import { User, Borrow, Book, Reservation } from '../types';
-import { getBorrows, getBooks, getReservations } from '../utils/localStorage';
+import { getBorrows, getBooks, getReservations } from '../utils/dataLayer';
 
 interface MyLibraryProps {
   user: User;
