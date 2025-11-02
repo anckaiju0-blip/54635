@@ -112,6 +112,10 @@ export default function LibrarianDashboard() {
     alert('Return processed successfully!');
   };
 
+  useEffect(() => {
+    loadData();
+  }, [activeTab]);
+
   const activeBorrows = borrows.filter((b) => b.status === 'active');
   const overdueBorrows = activeBorrows.filter(
     (b) => new Date(b.dueDate) < new Date()
