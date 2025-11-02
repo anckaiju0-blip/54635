@@ -62,7 +62,7 @@ export default function RoleSelection({ onSelectRole, onBack }: RoleSelectionPro
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <button
               onClick={() => onSelectRole('user')}
-              className="group bg-white/80 backdrop-blur-sm border-2 border-amber-200/50 hover:border-amber-400 rounded-3xl shadow-xl overflow-hidden transform hover:scale-102 transition-all hover:shadow-2xl text-left"
+              className="group w-full bg-white/80 backdrop-blur-sm border-2 border-amber-200/50 hover:border-amber-400 rounded-3xl shadow-xl overflow-hidden transform hover:scale-102 transition-all hover:shadow-2xl text-left"
             >
               <div className="h-48 bg-gradient-to-br from-amber-400 via-orange-400 to-rose-400 flex items-center justify-center relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
@@ -110,7 +110,7 @@ export default function RoleSelection({ onSelectRole, onBack }: RoleSelectionPro
                   </div>
                 </div>
                 <div className="mt-6 pt-6 border-t border-amber-100">
-                  <div className="bg-gradient-to-r from-amber-500 to-orange-500 group-hover:from-amber-600 group-hover:to-orange-600 text-white py-3 px-6 rounded-xl text-center font-semibold transition-all shadow-lg shadow-amber-500/30 group-hover:shadow-amber-600/50">
+                  <div className="bg-gradient-to-r from-amber-500 to-orange-500 group-hover:from-amber-600 group-hover:to-orange-600 text-white py-3 px-6 rounded-xl text-center font-semibold transition-all shadow-lg shadow-amber-500/30 group-hover:shadow-amber-600/50 cursor-pointer">
                     Start Your Journey
                   </div>
                 </div>
@@ -119,7 +119,7 @@ export default function RoleSelection({ onSelectRole, onBack }: RoleSelectionPro
 
             <button
               onClick={() => onSelectRole('librarian')}
-              className="group bg-white/80 backdrop-blur-sm border-2 border-amber-200/50 hover:border-emerald-400 rounded-3xl shadow-xl overflow-hidden transform hover:scale-102 transition-all hover:shadow-2xl text-left"
+              className="group w-full bg-white/80 backdrop-blur-sm border-2 border-amber-200/50 hover:border-emerald-400 rounded-3xl shadow-xl overflow-hidden transform hover:scale-102 transition-all hover:shadow-2xl text-left"
             >
               <div className="h-48 bg-gradient-to-br from-teal-400 via-emerald-400 to-green-400 flex items-center justify-center relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
@@ -167,7 +167,7 @@ export default function RoleSelection({ onSelectRole, onBack }: RoleSelectionPro
                   </div>
                 </div>
                 <div className="mt-6 pt-6 border-t border-amber-100">
-                  <div className="bg-gradient-to-r from-teal-500 to-emerald-500 group-hover:from-teal-600 group-hover:to-emerald-600 text-white py-3 px-6 rounded-xl text-center font-semibold transition-all shadow-lg shadow-teal-500/30 group-hover:shadow-teal-600/50">
+                  <div className="bg-gradient-to-r from-teal-500 to-emerald-500 group-hover:from-teal-600 group-hover:to-emerald-600 text-white py-3 px-6 rounded-xl text-center font-semibold transition-all shadow-lg shadow-teal-500/30 group-hover:shadow-teal-600/50 cursor-pointer">
                     Start Managing
                   </div>
                 </div>
