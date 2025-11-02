@@ -1,4 +1,4 @@
-import { Archive, Users, Clock, Search, BookOpen, Sparkles, Shield, Zap } from 'lucide-react';
+import { Archive, Users, Search, BookOpen, Sparkles, Shield, Zap } from 'lucide-react';
 
 interface LandingPageProps {
   onGetStarted: () => void;
@@ -144,23 +144,6 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
           </div>
         </section>
 
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
-          <div className="bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-600 rounded-3xl shadow-2xl shadow-blue-500/30 p-12 text-center text-white relative overflow-hidden">
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-20"></div>
-            <div className="relative z-10">
-              <h2 className="text-4xl font-bold mb-4">Ready to Transform Your Reading Experience?</h2>
-              <p className="text-xl mb-8 text-blue-50">
-                Join the modern library experience today
-              </p>
-              <button
-                onClick={onGetStarted}
-                className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-xl text-lg font-semibold transition-all transform hover:scale-105 shadow-xl"
-              >
-                Get Started Now
-              </button>
-            </div>
-          </div>
-        </section>
       </main>
 
       <footer className="bg-slate-900 border-t border-slate-800 text-slate-400 py-8 mt-20 relative">
