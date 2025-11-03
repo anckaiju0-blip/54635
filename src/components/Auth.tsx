@@ -17,9 +17,9 @@ export default function Auth({ onAuthSuccess, onBack }: AuthProps) {
     role: 'user' as 'user' | 'librarian',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const users = getUsers();
+    const users = await getUsers();
 
     if (isLogin) {
       const user = users.find(
@@ -46,7 +46,7 @@ export default function Auth({ onAuthSuccess, onBack }: AuthProps) {
       };
 
       users.push(newUser);
-      saveUsers(users);
+      await saveUsers(users);
       setCurrentUser(newUser);
       onAuthSuccess(newUser);
     }

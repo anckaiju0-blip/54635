@@ -27,36 +27,39 @@ export default function LibrarianDashboard() {
     loadData();
   }, []);
 
-  const loadData = () => {
-    setBooks(getBooks());
-    setBorrows(getBorrows());
-    setUsers(getUsers());
+  const loadData = async () => {
+    const booksData = await getBooks();
+    const borrowsData = await getBorrows();
+    const usersData = await getUsers();
+    setBooks(booksData);
+    setBorrows(borrowsData);
+    setUsers(usersData);
   };
 
-  const handleAddBook = (e: React.FormEvent) => {
+  const handleAddBook = async (e: React.FormEvent) => {
     e.preventDefault();
-    const allBooks = getBooks();
+    const allBooks = await getBooks();
     const newBook: Book = {
       id: Date.now().toString(),
       ...bookForm,
     };
     allBooks.push(newBook);
-    saveBooks(allBooks);
+    await saveBooks(allBooks);
     setBooks(allBooks);
     setShowAddBook(false);
     resetForm();
     alert('Book added successfully!');
   };
 
-  const handleUpdateBook = (e: React.FormEvent) => {
+  const handleUpdateBook = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingBook) return;
 
-    const allBooks = getBooks();
+    const allBooks = await getBooks();
     const updatedBooks = allBooks.map((b) =>
       b.id === editingBook.id ? { ...editingBook, ...bookForm } : b
     );
-    saveBooks(updatedBooks);
+    await saveBooks(updatedBooks);
     setBooks(updatedBooks);
     setEditingBook(null);
     resetForm();
@@ -92,23 +95,23 @@ export default function LibrarianDashboard() {
     });
   };
 
-  const handleProcessReturn = (borrowId: string) => {
-    const allBorrows = getBorrows();
+  const handleProcessReturn = async (borrowId: string) => {
+    const allBorrows = await getBorrows();
     const borrow = allBorrows.find((b) => b.id === borrowId);
     if (!borrow) return;
 
     const updatedBorrows = allBorrows.map((b) =>
       b.id === borrowId ? { ...b, status: 'returned' as const, returnDate: new Date().toISOString() } : b
     );
-    saveBorrows(updatedBorrows);
+    await saveBorrows(updatedBorrows);
 
-    const allBooks = getBooks();
+    const allBooks = await getBooks();
     const updatedBooks = allBooks.map((b) =>
       b.id === borrow.bookId ? { ...b, availableCopies: b.availableCopies + 1 } : b
     );
-    saveBooks(updatedBooks);
+    await saveBooks(updatedBooks);
 
-    loadData();
+    await loadData();
     alert('Return processed successfully!');
   };
 

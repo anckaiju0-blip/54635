@@ -18,10 +18,10 @@ export default function MyLibrary({ user, onBookSelect }: MyLibraryProps) {
     loadUserData();
   }, [user.id]);
 
-  const loadUserData = () => {
-    const allBorrows = getBorrows();
-    const allBooks = getBooks();
-    const allReservations = getReservations();
+  const loadUserData = async () => {
+    const allBorrows = await getBorrows();
+    const allBooks = await getBooks();
+    const allReservations = await getReservations();
 
     const userBorrows = allBorrows.filter((b) => b.userId === user.id);
 

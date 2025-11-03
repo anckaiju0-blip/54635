@@ -16,26 +16,29 @@ export default function BookDetails({ book, user, onClose, onUpdate }: BookDetai
   const [userReservation, setUserReservation] = useState<Reservation | null>(null);
 
   useEffect(() => {
-    const borrows = getBorrows();
-    const activeBorrow = borrows.find(
-      (b) => b.bookId === book.id && b.userId === user.id && b.status === 'active'
-    );
-    setUserBorrow(activeBorrow || null);
+    const loadUserData = async () => {
+      const borrows = await getBorrows();
+      const activeBorrow = borrows.find(
+        (b) => b.bookId === book.id && b.userId === user.id && b.status === 'active'
+      );
+      setUserBorrow(activeBorrow || null);
 
-    const reservations = getReservations();
-    const activeReservation = reservations.find(
-      (r) => r.bookId === book.id && r.userId === user.id && r.status === 'pending'
-    );
-    setUserReservation(activeReservation || null);
+      const reservations = await getReservations();
+      const activeReservation = reservations.find(
+        (r) => r.bookId === book.id && r.userId === user.id && r.status === 'pending'
+      );
+      setUserReservation(activeReservation || null);
+    };
+    loadUserData();
   }, [book.id, user.id]);
 
-  const handleBorrow = () => {
+  const handleBorrow = async () => {
     if (currentBook.availableCopies === 0) {
       alert('No copies available. Please reserve the book.');
       return;
     }
 
-    const borrows = getBorrows();
+    const borrows = await getBorrows();
     const newBorrow: Borrow = {
       id: Date.now().toString(),
       bookId: currentBook.id,
@@ -45,13 +48,13 @@ export default function BookDetails({ book, user, onClose, onUpdate }: BookDetai
       status: 'active',
     };
     borrows.push(newBorrow);
-    saveBorrows(borrows);
+    await saveBorrows(borrows);
 
-    const books = getBooks();
+    const books = await getBooks();
     const updatedBooks = books.map((b) =>
       b.id === currentBook.id ? { ...b, availableCopies: b.availableCopies - 1 } : b
     );
-    saveBooks(updatedBooks);
+    await saveBooks(updatedBooks);
 
     const updatedBook = updatedBooks.find((b) => b.id === currentBook.id)!;
     setCurrentBook(updatedBook);
@@ -60,8 +63,8 @@ export default function BookDetails({ book, user, onClose, onUpdate }: BookDetai
     alert('Book borrowed successfully!');
   };
 
-  const handleReserve = () => {
-    const reservations = getReservations();
+  const handleReserve = async () => {
+    const reservations = await getReservations();
     const newReservation: Reservation = {
       id: Date.now().toString(),
       bookId: currentBook.id,
@@ -70,24 +73,24 @@ export default function BookDetails({ book, user, onClose, onUpdate }: BookDetai
       status: 'pending',
     };
     reservations.push(newReservation);
-    saveReservations(reservations);
+    await saveReservations(reservations);
     setUserReservation(newReservation);
     onUpdate();
     alert('Book reserved successfully! You will be notified when it becomes available.');
   };
 
-  const handleReturn = () => {
-    const borrows = getBorrows();
+  const handleReturn = async () => {
+    const borrows = await getBorrows();
     const updatedBorrows = borrows.map((b) =>
       b.id === userBorrow?.id ? { ...b, status: 'returned' as const, returnDate: new Date().toISOString() } : b
     );
-    saveBorrows(updatedBorrows);
+    await saveBorrows(updatedBorrows);
 
-    const books = getBooks();
+    const books = await getBooks();
     const updatedBooks = books.map((b) =>
       b.id === currentBook.id ? { ...b, availableCopies: b.availableCopies + 1 } : b
     );
-    saveBooks(updatedBooks);
+    await saveBooks(updatedBooks);
 
     const updatedBook = updatedBooks.find((b) => b.id === currentBook.id)!;
     setCurrentBook(updatedBook);
@@ -96,12 +99,12 @@ export default function BookDetails({ book, user, onClose, onUpdate }: BookDetai
     alert('Book returned successfully!');
   };
 
-  const handleCancelReservation = () => {
-    const reservations = getReservations();
+  const handleCancelReservation = async () => {
+    const reservations = await getReservations();
     const updatedReservations = reservations.map((r) =>
       r.id === userReservation?.id ? { ...r, status: 'cancelled' as const } : r
     );
-    saveReservations(updatedReservations);
+    await saveReservations(updatedReservations);
     setUserReservation(null);
     onUpdate();
     alert('Reservation cancelled.');
